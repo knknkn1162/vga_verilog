@@ -17,4 +17,4 @@ open:
 	open out.vcd
 
 clean:
-	rm -rf *.o *.vcd
+	rm -rf *.o *.vcd **/*.o **/*.vcd
