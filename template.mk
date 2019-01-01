@@ -8,7 +8,7 @@ OPTION=$(INCLUDE_OPTION)
 all: $(FILES) clean
 
 %: %.o
-	vvp $^
+	vvp -N $^
 
 %.o: %.v
 	$(VC) ${OPTION} -o $@ $<
