@@ -1,0 +1,13 @@
+version: 2
+jobs:
+  build:
+    working_directory: /verilog
+    docker:
+      - image: knknkn1162/icarus_verilog
+    steps:
+      - checkout
+      - run:
+          name: run all testbenches
+          command: |
+            make --no-print-directory all
+          working_directory: /verilog
