@@ -1,0 +1,11 @@
+# instance assignment
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to clk
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to i_sclr
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to i_btn
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to o_ledr
+
+set_location_assignment PIN_M9 -to clk
+set_location_assignment PIN_AB12 -to i_sclr
+# key[0]
+set_location_assignment PIN_U7 -to i_btn
+set_location_assignment PIN_AA2 -to o_ledr

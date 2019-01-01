@@ -1,0 +1,13 @@
+*
+!Makefile
+!*.*
+*.qws
+*.qpf
+*.o
+*.vcd
+!*/*
+!include
+!switch
+!display
+!top
+!general
