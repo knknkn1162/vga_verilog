@@ -14,7 +14,7 @@ git push -u origin master
 
 + The verilog compiler .. icarus verilog.
 
-+ The default CI .. circle CI The dashboard is [here](https://circleci.com/gh/knknkn1162/verilog_template)
++ The default CI .. circle CI. The dashboard is [here](https://circleci.com/gh/knknkn1162/verilog_template)
 
 # (MY) coding rules
 
