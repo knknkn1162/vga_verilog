@@ -26,7 +26,7 @@ module enable_gen_tb;
     repeat(6) @(posedge clk)
       `assert_eq(o_en, 1'b0); // 6
     @(posedge clk) #1
-      `assert_eq(o_en, 1'b0);
+      `assert_eq(o_en, 1'b1);
     @(posedge clk) #1
       `assert_eq(o_en, 1'b0);
     @(posedge clk) #1
