@@ -7,7 +7,5 @@
 *.vcd
 !*/*
 !include
-!switch
-!display
-!top
 !general
+!component
