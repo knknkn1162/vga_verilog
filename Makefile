@@ -1,5 +1,5 @@
 include template.mk
-SUBDIRS=general serial
+SUBDIRS=general component
 
 .SUFFIX:
 .PHONY: all clean open
