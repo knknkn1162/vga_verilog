@@ -1,10 +1,5 @@
 !Makefile
-!*.*
 *.qws
 *.qpf
 *.o
 *.vcd
-!*/*
-!macro
-!general
-!component
