@@ -7,6 +7,6 @@ FILES=\
 	btn_in
 
 INCLUDES=\
-	include
+	macro
 
 include ../template.mk
