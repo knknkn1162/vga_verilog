@@ -15,3 +15,9 @@
     $display("<end of test>"); \
     $finish; \
   end
+
+`define alert_empty_tb \
+  begin \
+    $display("<empty testbench>"); \
+    $finish; \
+  end

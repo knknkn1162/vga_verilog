@@ -1,4 +1,4 @@
-SUBDIRS=general component
+SUBDIRS=general display component slot
 
 .SUFFIX:
 .PHONY: all clean open
