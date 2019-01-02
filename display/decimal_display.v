@@ -1,3 +1,6 @@
+`ifndef _decimal_display
+`define _decimal_display
+
 `include "decimal_decoder.v"
 
 module decimal_display (
@@ -29,3 +32,5 @@ module decimal_display (
   assign o_hex4 = s_hex[34:28];
   assign o_hex5 = s_hex[41:35];
 endmodule
+
+`endif

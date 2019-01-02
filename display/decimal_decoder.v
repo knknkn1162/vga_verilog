@@ -1,3 +1,6 @@
+`ifndef _decimal_decoder
+`define _decimal_decoder
+
 module decimal_decoder (
   input wire [3:0] i_num,
   output reg [6:0] o_seg7
@@ -21,3 +24,5 @@ module decimal_decoder (
   end
 
 endmodule
+
+`endif
