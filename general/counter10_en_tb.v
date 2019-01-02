@@ -2,10 +2,9 @@
 `include "counter10_en.v"
 
 module counter10_en_tb;
-  parameter WIDTH = 4;
 
   reg clk, i_sclr, i_en;
-  wire [WIDTH-1:0] o_cnt;
+  wire [3:0] o_cnt;
 
   parameter CLK_PERIOD = 10;
   counter10_en uut(
