@@ -28,6 +28,7 @@ git push -u origin master
 |reg|`s_`||
 |n-clk delay||`_$n`|
 |block in marco||`_block`|NOT semicolon|
+|negative logic(btn etc.)||`_n`||
 
 # macros
 
