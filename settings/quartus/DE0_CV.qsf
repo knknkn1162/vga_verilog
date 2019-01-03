@@ -492,8 +492,3 @@ set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_VS
 # End of pin and io_standard assignments
 #============================================================
 set_global_assignment -name SDC_FILE settings/quartus/DE0_CV.sdc
-
-set_global_assignment -name SEARCH_PATH macro
-set_global_assignment -name SEARCH_PATH general
-set_global_assignment -name SEARCH_PATH display
-set_global_assignment -name SEARCH_PATH component
