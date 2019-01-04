@@ -5,20 +5,25 @@
 
 module vsync (
   input wire clk, i_sclr, i_px_clk,
-  output wire o_vga_vsync
+  output wire o_vsync, o_addr
 );
 
-  localparam VSYNC_COUNTER = 525*800; // line * px
-  localparam VSYNC_COUNTER_BIT = 19;
-  localparam VSYNC_CLKS = 11'd1600;
-  wire [VSYNC_COUNTER_BIT-1:0] s_vsync_cnt;
+  // See http://www.tinyvga.com/vga-timing/640x480@60Hz
+  localparam SCAN_WIDTH = 800;
+  localparam VSYNC_PULSE_UTIME = 2*SCAN_WIDTH;
+  localparam BACK_PORCH_UTIME = 35*SCAN_WIDTH;
+  localparam VISIBLE_AREA_UTIME = 515*SCAN_WIDTH;
+  localparam COUNTER = 525*SCAN_WIDTH; // line * px
+  localparam COUNTER_BIT = 19;
+  wire [COUNTER_BIT-1:0] s_vsync_cnt;
 
 
-  counterN_en #(VSYNC_COUNTER, VSYNC_COUNTER_BIT) vsync_counter0 (
+  counterN_en #(COUNTER, COUNTER_BIT) vsync_counter0 (
     .clk(clk), .i_sclr(i_sclr), .i_en(i_px_clk), .o_cnt(s_vsync_cnt)
   );
 
-  assign o_vga_vsync = (s_vsync_cnt < VSYNC_CLKS) ? 1'b1 : 1'b0;
+  assign o_vsync = (s_vsync_cnt < VSYNC_PULSE_UTIME) ? 1'b1 : 1'b0;
+  assign o_addr = (s_vsync_cnt >= BACK_PORCH_UTIME && s_vsync_cnt < VISIBLE_AREA_UTIME) ? 1'b1 : 1'b0;
 endmodule
 
 `endif
