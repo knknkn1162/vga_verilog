@@ -1,7 +1,7 @@
-`ifndef _sll_register
-`define _sll_register
+`ifndef _shift_left_register
+`define _shift_left_register
 
-module sll_register #(
+module shift_left_register #(
   parameter BITS = 32
 ) (
   input wire clk, i_sclr, i_en, i_dat,
