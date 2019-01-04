@@ -1,13 +1,13 @@
 `include "testbench.v"
-`include "bshift_register.v"
+`include "sll_register.v"
 
-module bshift_register_tb;
+module sll_register_tb;
   parameter BITS = 5;
   reg clk, i_sclr, i_en, i_dat;
   wire [BITS-1:0] o_data;
 
   parameter CLK_PERIOD = 10;
-  bshift_register #(BITS) uut(
+  sll_register #(BITS) uut(
     .clk(clk),
     .i_sclr(i_sclr),
     .i_en(i_en),

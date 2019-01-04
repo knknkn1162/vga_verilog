@@ -1,7 +1,7 @@
-`ifndef _bshift_register
-`define _bshift_register
+`ifndef _sll_register
+`define _sll_register
 
-module bshift_register #(
+module sll_register #(
   parameter BITS = 32
 ) (
   input wire clk, i_sclr, i_en, i_dat,
