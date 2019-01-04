@@ -1,4 +1,4 @@
-SUBDIRS=general display component
+SUBDIRS=general display component vga
 
 .SUFFIX:
 .PHONY: all clean open
