@@ -1,6 +1,3 @@
-`ifndef _top
-`define _top
-
 `include "px_clk.v"
 `include "hsync.v"
 `include "vsync.v"
