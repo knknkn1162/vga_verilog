@@ -23,13 +23,11 @@ module enableN_gen_tb;
       i_sclr = 1'b1;
     @(posedge clk) #1
       i_sclr = 1'b0;
-      `assert_eq(o_en, 1'b1); // 0
-    @(posedge clk) #1
-      `assert_eq(o_en, 1'b0); // 1
+      `assert_eq(o_en, 1'b0); // 0
     repeat(8) @(posedge clk) #1
-      `assert_eq(o_en, 1'b0); // 9
+      `assert_eq(o_en, 1'b0); // 8
     @(posedge clk) #1
-      `assert_eq(o_en, 1'b1); // 0
+      `assert_eq(o_en, 1'b1); // 9
     @(posedge clk) #1
       `assert_eq(o_en, 1'b0);
     @(posedge clk) #1

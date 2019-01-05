@@ -18,7 +18,7 @@ module enable_gen #(
     .o_cnt(w_cnt)
   );
 
-  assign o_en = (w_cnt == {BIT_SIZE{1'b0}}) ? 1'b1 : 1'b0;
+  assign o_en = (w_cnt == {BIT_SIZE{1'b1}}) ? 1'b1 : 1'b0;
 endmodule
 
 `endif

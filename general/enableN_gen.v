@@ -17,7 +17,7 @@ module enableN_gen #(
     .o_cnt(s_cnt)
   );
 
-  assign o_en = (s_cnt == {WIDTH{1'b0}}) ? 1'b1 : 1'b0;
+  assign o_en = (s_cnt == ULIMIT-1) ? 1'b1 : 1'b0;
 endmodule
 
 `endif
