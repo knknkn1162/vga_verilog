@@ -38,19 +38,23 @@ module gen_640_480 (
   assign {s_color1, s_llimitx1, s_ulimitx1, s_llimity1, s_ulimity1} = s_data1;
 
   // define square area and color
-  assign s_area_en = (i_haddr_enb & (i_hidx >= s_llimitx1 && i_hidx < s_ulimitx1)) & (i_vaddr_enb & (i_vidx >= s_llimity1 && i_vidx < s_ulimity1));
+
   // update
-  assign s_color0 = (s_area_en) ? RED : BLUE; // constant
+  assign s_color0 = RED+1'd1; // constant
   assign s_llimitx0 = (s_llimitx1 == WIDTH) ? 10'd0 : s_llimitx1 + 1'd1;
   assign s_ulimitx0 = (s_ulimitx1 == WIDTH) ? 10'd0 : s_ulimitx1 + 1'd1;
   assign s_llimity0 = (s_llimity1 == HEIGHT) ? 9'd0 : s_llimity1 + 1'd1;
   assign s_ulimity0 = (s_ulimity1 == HEIGHT) ? 9'd0 : s_ulimity1 + 1'd1;
 
+  // draw
+  wire [11:0] s_color2;
+  assign s_area_en = (i_haddr_enb & (i_hidx >= s_llimitx1 && i_hidx < s_ulimitx1)) & (i_vaddr_enb & (i_vidx >= s_llimity1 && i_vidx < s_ulimity1));
+  assign s_color2 = (s_area_en) ? s_color1 : BLUE;
 
   wire [11:0] s_color;
   mux2 #(12) mux2_0(
     .i_d0(12'h000),
-    .i_d1(s_color1),
+    .i_d1(s_color2),
     .i_s(i_vaddr_enb & i_haddr_enb),
     .o_y(s_color)
   );
