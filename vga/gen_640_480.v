@@ -6,7 +6,6 @@
 
 module gen_640_480 (
   input wire clk, i_sclr, i_px_clk,
-  input wire i_hsync_en, i_vsync_en,
   input wire i_haddr_en, i_vaddr_en,
   input wire [9:0] i_hidx,
   input wire [8:0] i_vidx,
