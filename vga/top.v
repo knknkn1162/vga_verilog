@@ -9,15 +9,17 @@ module top (
   output wire o_vga_hsync, o_vga_vsync
 );
   
-  wire s_px_clk;
+  wire s_px_clk, s_ven;
   wire s_hsync_en, s_vsync_en;
   wire [9:0] s_hidx; // [0, 640)
+  wire [8:0] s_vidx; // [0, 480)
   wire s_haddr_en, s_vaddr_en;
   wire [3:0] s_red, s_green, s_blue;
 
   px_clk px_clk0(
     .clk(clk), .i_sclr(i_sclr),
-    .o_px_clk(s_px_clk)
+    .o_px_clk(s_px_clk),
+    .o_ven(s_ven)
   );
 
   hsync hsync0 (
@@ -27,15 +29,16 @@ module top (
   );
 
   vsync vsync0 (
-    .clk(clk), .i_sclr(i_sclr), .i_px_clk(s_px_clk),
+    .clk(clk), .i_sclr(i_sclr), .i_px_clk(s_ven),
     .o_vsync_en(o_vga_vsync), .o_addr_en(s_vaddr_en)
+    .o_idx(s_vidx)
   );
 
   // TODO: create image
   gen_640_480 gen_640_480_0 (
     .clk(clk), .i_sclr(i_sclr), .i_px_clk(s_px_clk),
     .i_haddr_en(s_haddr_en), .i_hidx(s_hidx),
-    .i_vaddr_en(s_vaddr_en),
+    .i_vaddr_en(s_vaddr_en), .i_vidx(s_vidx),
     .o_vga_red(o_vga_red), .o_vga_green(o_vga_green), .o_vga_blue(o_vga_blue)
   );
 
