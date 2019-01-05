@@ -5,7 +5,7 @@
 
 module vsync (
   input wire clk, i_sclr, i_px_clk,
-  output wire o_vsync, o_addr
+  output wire o_vsync_en, o_addr_en
 );
 
   // See http://www.tinyvga.com/vga-timing/640x480@60Hz
@@ -22,8 +22,8 @@ module vsync (
     .clk(clk), .i_sclr(i_sclr), .i_en(i_px_clk), .o_cnt(s_vsync_cnt)
   );
 
-  assign o_vsync = (s_vsync_cnt < VSYNC_PULSE_UTIME) ? 1'b1 : 1'b0;
-  assign o_addr = (s_vsync_cnt >= BACK_PORCH_UTIME && s_vsync_cnt < VISIBLE_AREA_UTIME) ? 1'b1 : 1'b0;
+  assign o_vsync_en = (s_vsync_cnt < VSYNC_PULSE_UTIME) ? 1'b1 : 1'b0;
+  assign o_addr_en = (s_vsync_cnt >= BACK_PORCH_UTIME && s_vsync_cnt < VISIBLE_AREA_UTIME) ? 1'b1 : 1'b0;
 endmodule
 
 `endif
