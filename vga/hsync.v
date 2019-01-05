@@ -5,7 +5,7 @@
 
 module hsync (
   input wire clk, i_sclr, i_px_clk,
-  output wire o_hsync_en, o_addr_en,
+  output wire o_hsync_enb, o_addr_enb,
   output wire [9:0] o_idx
 );
 
@@ -22,8 +22,8 @@ module hsync (
     .clk(clk), .i_sclr(i_sclr), .i_en(i_px_clk), .o_cnt(s_cnt)
   );
 
-  assign o_hsync_en = (s_cnt < PULSE_UTIME) ? 1'b1 : 1'b0;
-  assign o_addr_en = (s_cnt >= BACK_PORCH_UTIME && s_cnt < VISIBLE_AREA_UTIME) ? 1'b1 : 1'b0;
+  assign o_hsync_enb = (s_cnt < PULSE_UTIME) ? 1'b1 : 1'b0;
+  assign o_addr_enb = (s_cnt >= BACK_PORCH_UTIME && s_cnt < VISIBLE_AREA_UTIME) ? 1'b1 : 1'b0;
   assign o_idx = s_cnt - BACK_PORCH_UTIME;
 endmodule
 

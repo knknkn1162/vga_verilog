@@ -6,7 +6,7 @@
 
 module vsync (
   input wire clk, i_sclr, i_ven,
-  output wire o_vsync_en, o_addr_en,
+  output wire o_vsync_enb, o_addr_enb,
   output wire [8:0] o_idx
 );
 
@@ -23,8 +23,8 @@ module vsync (
     .clk(clk), .i_sclr(i_sclr), .i_en(i_ven), .o_cnt(s_cnt)
   );
 
-  assign o_vsync_en = (s_cnt < VSYNC_PULSE_UTIME) ? 1'b1 : 1'b0;
-  assign o_addr_en = (s_cnt >= BACK_PORCH_UTIME && s_cnt < VISIBLE_AREA_UTIME) ? 1'b1 : 1'b0;
+  assign o_vsync_enb = (s_cnt < VSYNC_PULSE_UTIME) ? 1'b1 : 1'b0;
+  assign o_addr_enb = (s_cnt >= BACK_PORCH_UTIME && s_cnt < VISIBLE_AREA_UTIME) ? 1'b1 : 1'b0;
   assign s_idx = s_cnt - BACK_PORCH_UTIME;
   assign o_idx = s_idx[8:0];
 endmodule
