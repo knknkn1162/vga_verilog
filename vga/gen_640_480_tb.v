@@ -1,7 +1,7 @@
 `include "testbench.v"
-`include "rgb.v"
+`include "gen_640_480.v"
 
-module rgb_tb;
+module gen_640_480_tb;
   initial begin
     `alert_empty_tb;
   end
