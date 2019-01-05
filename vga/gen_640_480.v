@@ -2,7 +2,6 @@
 `define _gen_640_480
 
 `include "mux2.v"
-`include "counterN_en.v"
 
 module gen_640_480 (
   input wire clk, i_sclr, i_px_clk,
@@ -16,6 +15,8 @@ module gen_640_480 (
   wire s_area_en;
   localparam RED = 12'hF00;
   localparam BLUE = 12'h00F;
+  localparam WIDTH = 10'd640;
+  localparam HEIGHT = 9'd480;
 
 
   wire [49:0] s_data0;
@@ -40,10 +41,10 @@ module gen_640_480 (
   assign s_area_en = (i_haddr_enb & (i_hidx >= s_llimitx1 && i_hidx < s_ulimitx1)) & (i_vaddr_enb & (i_vidx >= s_llimity1 && i_vidx < s_ulimity1));
   // update
   assign s_color0 = (s_area_en) ? RED : BLUE; // constant
-  assign s_llimitx0 = s_llimitx1 + 1'd1;
-  assign s_ulimitx0 = s_ulimitx1 + 1'd1;
-  assign s_llimity0 = s_llimity1 + 1'd1;
-  assign s_ulimity0 = s_ulimity1 + 1'd1;
+  assign s_llimitx0 = (s_llimitx1 == WIDTH) ? 10'd0 : s_llimitx1 + 1'd1;
+  assign s_ulimitx0 = (s_ulimitx1 == WIDTH) ? 10'd0 : s_ulimitx1 + 1'd1;
+  assign s_llimity0 = (s_llimity1 == HEIGHT) ? 9'd0 : s_llimity1 + 1'd1;
+  assign s_ulimity0 = (s_ulimity1 == HEIGHT) ? 9'd0 : s_ulimity1 + 1'd1;
 
 
   wire [11:0] s_color;
