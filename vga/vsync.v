@@ -4,6 +4,8 @@
 `include "enableN_gen.v"
 `include "counterN_en.v"
 
+`include "shift_left_register.v"
+
 module vsync (
   input wire clk, i_sclr, i_ven,
   output wire o_vsync_enb, o_addr_enb,
@@ -19,6 +21,8 @@ module vsync (
   localparam COUNTER_BIT = 10;
   wire [COUNTER_BIT-1:0] s_cnt;
   wire [9:0] s_idx;
+  wire s_frame_en;
+  wire [2:0] s_frame_enb;
 
   counterN_en #(COUNTER, COUNTER_BIT) vsync_counter0 (
     .clk(clk), .i_sclr(i_sclr), .i_en(i_ven), .o_cnt(s_cnt)
@@ -28,7 +32,12 @@ module vsync (
   assign o_addr_enb = (s_cnt >= BACK_PORCH_UTIME && s_cnt < VISIBLE_AREA_UTIME) ? 1'b1 : 1'b0;
   assign s_idx = s_cnt - BACK_PORCH_UTIME;
   assign o_idx = s_idx[8:0];
-  assign o_frame_en = (s_cnt == 10'd0) ? 1'b1 : 1'b0;
+  assign s_frame_en = (s_cnt == 10'd0) ? 1'b1 : 1'b0;
+
+  shift_left_register #(3) shift_left_register0(
+    .clk(clk), .i_sclr(i_sclr), .i_en(1'b1), .i_dat(s_frame_en), .o_data(s_frame_enb)
+  );
+  assign o_frame_en = (s_frame_enb == 3'b011) ? 1'b1 : 1'b0;
 endmodule
 
 `endif

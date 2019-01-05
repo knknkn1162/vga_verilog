@@ -3,13 +3,18 @@
 `include "vsync.v"
 `include "gen_640_480.v"
 
+`include "counter_en.v"
+`include "hex_display.v"
+
 module top (
   input wire clk, i_sclr,
   output wire [3:0] o_vga_red, o_vga_green, o_vga_blue,
-  output wire o_vga_hsync, o_vga_vsync
+  output wire o_vga_hsync, o_vga_vsync,
+  output wire [6:0] o_hex0, o_hex1, o_hex2, o_hex3, o_hex4, o_hex5
 );
   
   wire s_px_clk, s_ven;
+  wire s_frame_en;
   wire s_hsync_enb, s_vsync_enb;
   wire [9:0] s_hidx; // [0, 640)
   wire [8:0] s_vidx; // [0, 480)
@@ -33,6 +38,22 @@ module top (
     .o_vsync_enb(o_vga_vsync), .o_addr_enb(s_vaddr_enb),
     .o_frame_en(s_frame_en),
     .o_idx(s_vidx)
+  );
+
+  wire [23:0] s_frame_cnt;
+  counter_en #(24) counter_en_frame(
+    .clk(clk), .i_sclr(i_sclr), .i_en(s_frame_en),
+    .o_cnt(s_frame_cnt)
+  );
+
+  hex_display hex_display0 (
+    .i_num(s_frame_cnt),
+    .o_hex0(o_hex0),
+    .o_hex1(o_hex1),
+    .o_hex2(o_hex2),
+    .o_hex3(o_hex3),
+    .o_hex4(o_hex4),
+    .o_hex5(o_hex5)
   );
 
   gen_640_480 gen_640_480_0 (
