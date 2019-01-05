@@ -2,6 +2,7 @@
 `define _px_clk
 
 `include "toggle.v"
+`include "enableN_gen.v"
 
 module px_clk (
   input wire clk, i_sclr,
@@ -17,7 +18,7 @@ module px_clk (
     .o_sw(o_px_clk)
   );
 
-  enableN_gen #(WIDTH*2, 11) (
+  enableN_gen #(WIDTH*2, 11) enableN_gen0(
     .clk(clk), .i_sclr(i_sclr),
     .o_en(o_ven)
   );

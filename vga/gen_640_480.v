@@ -19,7 +19,7 @@ module gen_640_480 (
   localparam BLUE = 12'h000;
 
   assign s_area_en = (i_haddr_en & (i_hidx >= 10'd100 && i_hidx < 10'd200)) & (i_vaddr_en & (i_vidx >= 9'd100 && i_vidx < 9'd200));
-  assign s_color0 = (s_area0) ? RED : BLUE;
+  assign s_color0 = (s_area_en) ? RED : BLUE;
 
   mux2 #(12) mux2_0(
     .i_d0(12'h000),

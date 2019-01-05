@@ -29,8 +29,8 @@ module top (
   );
 
   vsync vsync0 (
-    .clk(clk), .i_sclr(i_sclr), .i_px_clk(s_ven),
-    .o_vsync_en(o_vga_vsync), .o_addr_en(s_vaddr_en)
+    .clk(clk), .i_sclr(i_sclr), .i_ven(s_ven),
+    .o_vsync_en(o_vga_vsync), .o_addr_en(s_vaddr_en),
     .o_idx(s_vidx)
   );
 
