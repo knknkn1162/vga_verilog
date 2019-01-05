@@ -1,7 +1,6 @@
 `include "px_clk.v"
 `include "hsync.v"
 `include "vsync.v"
-`include "rgb.v"
 `include "gen_640_480.v"
 
 module top (
@@ -37,9 +36,7 @@ module top (
   gen_640_480 gen_640_480_0 (
     .clk(clk), .i_sclr(i_sclr), .i_px_clk(i_px_clk),
     .i_haddr_en(s_haddr_en), .i_vaddr_en(s_vaddr_en),
-    .o_vga_red(o_vga_red), o_vga_green(o_vga_green), o_vga_blue(o_vga_blue)
+    .o_vga_red(o_vga_red), .o_vga_green(o_vga_green), .o_vga_blue(o_vga_blue)
   );
 
 endmodule
-
-`endif
