@@ -31,14 +31,15 @@ module top (
   vsync vsync0 (
     .clk(clk), .i_sclr(i_sclr), .i_ven(s_ven),
     .o_vsync_enb(o_vga_vsync), .o_addr_enb(s_vaddr_enb),
+    .o_frame_en(s_frame_en),
     .o_idx(s_vidx)
   );
 
-  // TODO: create image
   gen_640_480 gen_640_480_0 (
     .clk(clk), .i_sclr(i_sclr), .i_px_clk(s_px_clk),
     .i_haddr_enb(s_haddr_enb), .i_hidx(s_hidx),
     .i_vaddr_enb(s_vaddr_enb), .i_vidx(s_vidx),
+    .i_frame_en(s_frame_en),
     .o_vga_red(o_vga_red), .o_vga_green(o_vga_green), .o_vga_blue(o_vga_blue)
   );
 

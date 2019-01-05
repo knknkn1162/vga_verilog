@@ -7,6 +7,7 @@
 module vsync (
   input wire clk, i_sclr, i_ven,
   output wire o_vsync_enb, o_addr_enb,
+  output wire o_frame_en,
   output wire [8:0] o_idx
 );
 
@@ -27,6 +28,7 @@ module vsync (
   assign o_addr_enb = (s_cnt >= BACK_PORCH_UTIME && s_cnt < VISIBLE_AREA_UTIME) ? 1'b1 : 1'b0;
   assign s_idx = s_cnt - BACK_PORCH_UTIME;
   assign o_idx = s_idx[8:0];
+  assign o_frame_en = (s_cnt == 10'd0) ? 1'b1 : 1'b0;
 endmodule
 
 `endif
