@@ -5,7 +5,8 @@
 
 module hsync (
   input wire clk, i_sclr, i_px_clk,
-  output wire o_hsync_en, o_addr_en
+  output wire o_hsync_en, o_addr_en,
+  output wire [9:0] o_idx
 );
 
   // See http://www.tinyvga.com/vga-timing/640x480@60Hz
@@ -15,14 +16,15 @@ module hsync (
   localparam COUNTER = 800;
   localparam COUNTER_BIT = 10;
   localparam CLKS = 7'd96;
-  wire [COUNTER_BIT-1:0] s_hsync_cnt;
+  wire [COUNTER_BIT-1:0] s_cnt;
 
   counterN_en #(COUNTER, COUNTER_BIT) hsync_counter0 (
-    .clk(clk), .i_sclr(i_sclr), .i_en(i_px_clk), .o_cnt(s_hsync_cnt)
+    .clk(clk), .i_sclr(i_sclr), .i_en(i_px_clk), .o_cnt(s_cnt)
   );
 
-  assign o_hsync_en = (s_hsync_cnt < PULSE_UTIME) ? 1'b1 : 1'b0;
-  assign o_addr_en = (s_hsync_cnt >= BACK_PORCH_UTIME && s_hsync_cnt < VISIBLE_AREA_UTIME) ? 1'b1 : 1'b0;
+  assign o_hsync_en = (s_cnt < PULSE_UTIME) ? 1'b1 : 1'b0;
+  assign o_addr_en = (s_cnt >= BACK_PORCH_UTIME && s_cnt < VISIBLE_AREA_UTIME) ? 1'b1 : 1'b0;
+  assign o_idx = s_cnt - BACK_PORCH_UTIME;
 endmodule
 
 `endif
