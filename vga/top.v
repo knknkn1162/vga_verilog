@@ -10,7 +10,7 @@
 module top (
   input wire clk, i_sclr_n,
   output wire [3:0] o_vga_red, o_vga_green, o_vga_blue,
-  output wire o_hsync, o_vsync
+  output wire o_vga_hsync, o_vga_vsync
 );
   
   wire s_sclr;
@@ -28,12 +28,12 @@ module top (
 
   hsync hsync0 (
     .clk(clk), .i_sclr(s_sclr), .i_px_clk(s_px_clk),
-    .o_hsync_en(o_hsync), .o_addr_en(s_haddr_en)
+    .o_hsync_en(o_vga_hsync), .o_addr_en(s_haddr_en)
   );
 
   vsync vsync0 (
     .clk(clk), .i_sclr(s_sclr), .i_px_clk(s_px_clk),
-    .o_vsync_en(o_vsync), .o_addr_en(s_vaddr_en)
+    .o_vsync_en(o_vga_vsync), .o_addr_en(s_vaddr_en)
   );
 
   // TODO: create image
